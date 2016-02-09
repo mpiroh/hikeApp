@@ -12,13 +12,8 @@ public class UzivatelMysqlDaO implements UzivatelDaO {
 
     private JdbcTemplate tmp;
 
-    public UzivatelMysqlDaO() {
-        tmp = new JdbcTemplate();
-        MysqlDataSource ds = new MysqlDataSource();
-        ds.setURL("jdbc:mysql://localhost/Hike");
-        ds.setUser("paz1c");
-        ds.setPassword("paz1c");
-        tmp.setDataSource(ds);
+    public UzivatelMysqlDaO(JdbcTemplate tmp) {
+        this.tmp = tmp;
     }
 
     @Override

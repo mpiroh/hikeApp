@@ -33,14 +33,9 @@ import org.springframework.jdbc.support.lob.LobHandler;
 public class MysqlTuraDaO implements TuraDaO {
 
     private JdbcTemplate tmp;
-
-    public MysqlTuraDaO() {
-        MysqlDataSource ds = new MysqlDataSource();
-        ds.setURL("jdbc:mysql://localhost/Hike");
-        ds.setUser("paz1c");
-        ds.setPassword("paz1c");
-        tmp = new JdbcTemplate();
-        tmp.setDataSource(ds);
+    
+    public MysqlTuraDaO(JdbcTemplate tmp) {
+        this.tmp = tmp;
     }
 
     @Override

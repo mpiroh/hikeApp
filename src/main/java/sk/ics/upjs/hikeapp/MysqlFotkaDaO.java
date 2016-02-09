@@ -25,13 +25,8 @@ public class MysqlFotkaDaO implements FotkaDaO {
     
     private JdbcTemplate tmp;
     
-    public MysqlFotkaDaO() {
-        MysqlDataSource ds = new MysqlDataSource();
-        ds.setURL("jdbc:mysql://localhost/Hike");
-        ds.setUser("paz1c");
-        ds.setPassword("paz1c");
-        tmp = new JdbcTemplate();
-        tmp.setDataSource(ds);
+    public MysqlFotkaDaO(JdbcTemplate tmp) {
+        this.tmp = tmp;
     }
     
     @Override

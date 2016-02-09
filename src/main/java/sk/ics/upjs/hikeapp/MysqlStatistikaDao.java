@@ -8,13 +8,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 public class MysqlStatistikaDao implements StatistikaDao {
     private JdbcTemplate jdbcTemplate;
     
-    public MysqlStatistikaDao() {
-        MysqlDataSource ds = new MysqlDataSource();
-        ds.setURL("jdbc:mysql://localhost/Hike");
-        ds.setUser("paz1c");
-        ds.setPassword("paz1c");
-        jdbcTemplate = new JdbcTemplate();
-        jdbcTemplate.setDataSource(ds);
+    public MysqlStatistikaDao(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
     }
     
     @Override
