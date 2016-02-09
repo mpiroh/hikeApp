@@ -373,20 +373,20 @@ public class UpravaForm extends javax.swing.JFrame implements ActionListener {
         BufferedImage logInObrazok1 = null;
         BufferedImage imgPoVymazani = null;
 
-        try {
-            logInObrazok1 = ImageIO.read(new File("C:\\logo\\mm.png"));
-            imgPoVymazani = ImageIO.read(new File("C:\\naMenu\\mountain45.png"));
-
-        } catch (IOException ex) {
-            System.err.println("Neni obrazok!");
-        }
-        Image scaledObrazok1 = logInObrazok1.getScaledInstance(600,
-                240, Image.SCALE_SMOOTH);
-        Image scaledObrazok2 = imgPoVymazani.getScaledInstance(100,
-                90, Image.SCALE_SMOOTH);
-
-        fotkaLabel.setIcon(new ImageIcon(scaledObrazok1));
-        poVymazaniIcon = new ImageIcon(scaledObrazok2);
+//        try {
+//            logInObrazok1 = ImageIO.read(new File("C:\\logo\\mm.png"));
+//            imgPoVymazani = ImageIO.read(new File("C:\\naMenu\\mountain45.png"));
+//
+//        } catch (IOException ex) {
+//            System.err.println("Neni obrazok!");
+//        }
+//        Image scaledObrazok1 = logInObrazok1.getScaledInstance(600,
+//                240, Image.SCALE_SMOOTH);
+//        Image scaledObrazok2 = imgPoVymazani.getScaledInstance(100,
+//                90, Image.SCALE_SMOOTH);
+//
+//        fotkaLabel.setIcon(new ImageIcon(scaledObrazok1));
+//        poVymazaniIcon = new ImageIcon(scaledObrazok2);
 
         gbc.gridx = 0;
         gbc.gridy = 0;

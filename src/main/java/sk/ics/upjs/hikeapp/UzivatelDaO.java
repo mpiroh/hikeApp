@@ -13,5 +13,10 @@ public interface UzivatelDaO {
     public boolean overMeno(String meno);
 
     public boolean overUzivatela(String meno, String heslo);
-
+    
+    public List<Uzivatel> dajVsetkychZoradenychPodlaPoctuTur();
+    
+    public List<Uzivatel> dajVsetkychZoradenychPodlaPoctuKm();
+        
+    public List<Uzivatel> dajVsetkychZoradenychPodlaPriemernejObtiaznosti();
 }

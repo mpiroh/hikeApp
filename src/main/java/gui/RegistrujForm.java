@@ -22,6 +22,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import sk.ics.upjs.hikeapp.DaOFactory;
+import sk.ics.upjs.hikeapp.MysqlStatistikaDao;
+import sk.ics.upjs.hikeapp.Statistika;
+import sk.ics.upjs.hikeapp.StatistikaDao;
 import sk.ics.upjs.hikeapp.Uzivatel;
 import sk.ics.upjs.hikeapp.UzivatelDaO;
 
@@ -33,6 +36,7 @@ public class RegistrujForm extends javax.swing.JFrame {
     private JButton registerButton = new JButton("Registruj");
     private JLabel obrazokLabel = new JLabel();
     private UzivatelDaO uzivatel = DaOFactory.INSTANCE.getUserDaO();
+    private StatistikaDao statistikaDao = DaOFactory.INSTANCE.getStatistikaDao();
 
     public RegistrujForm() {
         initComponents();
@@ -52,10 +56,10 @@ public class RegistrujForm extends javax.swing.JFrame {
         } catch (IOException ex) {
             System.err.println("Neni obrazok!");
         }
-        Image scaledObrazok1 = logInObrazok1.getScaledInstance(80,
-                75, Image.SCALE_SMOOTH);
+//        Image scaledObrazok1 = logInObrazok1.getScaledInstance(80,
+//                75, Image.SCALE_SMOOTH);
 
-        obrazokLabel.setIcon(new ImageIcon(scaledObrazok1));
+//        obrazokLabel.setIcon(new ImageIcon(scaledObrazok1));
 
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         int height = dim.height;
@@ -138,6 +142,24 @@ public class RegistrujForm extends javax.swing.JFrame {
                     u.setHeslo(heslo.trim());
                 }
                 uzivatel.vlozUzivatela(u);
+                
+                Long idUzivatela = uzivatel.getUserId(u.getMeno());
+                
+                Statistika statistika = new Statistika();
+                statistika.setIdU(idUzivatela);
+                statistika.setPocetTur(0);
+                statistika.setKmSpolu(0);
+                statistika.setPriemernaObtiaznost(0);
+                statistika.setPocetFotiek(0);
+                statistika.setSpoluTurJar(0);
+                statistika.setSpoluTurLeto(0);
+                statistika.setSpoluTurJesen(0);
+                statistika.setSpoluTurZima(0);
+                statistika.setPocetHodnoteni(0);
+                statistika.setHodSpolu(0);
+                statistika.setPriemernaRychlost(0);
+                statistikaDao.pridaj(statistika);
+                
                 RegistrujForm.this.dispose();
                 new UzivatelMenu(uzivatel.getUserId(meno)).setVisible(true);
             }

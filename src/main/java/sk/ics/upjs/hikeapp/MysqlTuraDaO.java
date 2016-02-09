@@ -36,9 +36,9 @@ public class MysqlTuraDaO implements TuraDaO {
 
     public MysqlTuraDaO() {
         MysqlDataSource ds = new MysqlDataSource();
-        ds.setURL("jdbc:mysql://localhost/hike");
-        ds.setUser("root");
-        ds.setPassword("bambinko");
+        ds.setURL("jdbc:mysql://localhost/Hike");
+        ds.setUser("paz1c");
+        ds.setPassword("paz1c");
         tmp = new JdbcTemplate();
         tmp.setDataSource(ds);
     }
@@ -235,10 +235,11 @@ public class MysqlTuraDaO implements TuraDaO {
     @Override
     public void pridaj(Tura tura) {
         String insert = "insert into tura values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-        Object dlzka = null;
-        if (tura.getDlzka() != 0) {
-            dlzka = tura.getDlzka();
-        }
+        //Object dlzka = null;
+        //if (tura.getDlzka() != 0) {
+        //    dlzka = tura.getDlzka();
+        //}
+        double dlzka = tura.getDlzka();
         tmp.update(insert, null, tura.getIdU(), tura.getNazov(), spracujPopisDoStringu(tura.getPopis()), tura.getPohorie(), tura.getCiel(),
                 tura.getCasovaNarocnost(), tura.getRocneObdobie(), tura.getObtiaznost(), tura.isMimoChodnika(),
                 dlzka, tura.getHodnotenie(), tura.getPocetHodnoteni(), tura.getDetail());

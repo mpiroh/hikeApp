@@ -15,4 +15,8 @@ public enum DaOFactory {
     public FotkaDaO getFotkaDaO() {
         return new MysqlFotkaDaO();
     }
+    
+    public StatistikaDao getStatistikaDao() {
+        return new MysqlStatistikaDao();
+    }
 }

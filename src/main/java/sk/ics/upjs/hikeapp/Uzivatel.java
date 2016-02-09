@@ -29,4 +29,9 @@ public class Uzivatel {
     public String getHeslo() {
         return heslo;
     }
+
+    @Override
+    public String toString() {
+        return meno;
+    }
 }

@@ -73,16 +73,16 @@ public class TuraForm extends javax.swing.JFrame {
         sr.setRating(tura.getHodnotenie());
         BufferedImage logInObrazok1 = null;
         
-        try {
-            logInObrazok1 = ImageIO.read(new File("C:\\logo\\mm.png"));
-            
-        } catch (IOException ex) {
-            System.err.println("Neni obrazok!");
-        }
-        Image scaledObrazok1 = logInObrazok1.getScaledInstance(600,
-                240, Image.SCALE_SMOOTH);
+//        try {
+//            logInObrazok1 = ImageIO.read(new File("C:\\logo\\mm.png"));
+//           
+//        } catch (IOException ex) {
+//            System.err.println("Neni obrazok!");
+//        }
+//        Image scaledObrazok1 = logInObrazok1.getScaledInstance(600,
+//                240, Image.SCALE_SMOOTH);
         
-        fotkaLabel.setIcon(new ImageIcon(scaledObrazok1));
+//        fotkaLabel.setIcon(new ImageIcon(scaledObrazok1));
         zoznam = this.spracujFotky(fotos.dajFotkyDanejTury(idT));
         //
         GridBagConstraints gbc = new GridBagConstraints();

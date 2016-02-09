@@ -112,22 +112,22 @@ public class LogInForm extends javax.swing.JFrame implements MouseListener {
             setLayout(new GridBagLayout());
             setBackground(Color.white);
 
-            BufferedImage logInObrazok = null;
-            try {
-                logInObrazok = ImageIO.read(new File("C:\\logo\\loginLogo.jpg"));
-            } catch (IOException ex) {
-                System.err.println("Neni obrazok!");
-            }
-            Image scaledObrazok = logInObrazok.getScaledInstance(350,
-                    220, Image.SCALE_SMOOTH);
-            ImageIcon img = new ImageIcon(scaledObrazok);
+//            BufferedImage logInObrazok = null;
+//            try {
+//                logInObrazok = ImageIO.read(new File("C:\\logo\\loginLogo.jpg"));
+//            } catch (IOException ex) {
+//                System.err.println("Neni obrazok!");
+//           }
+//            Image scaledObrazok = logInObrazok.getScaledInstance(350,
+//                    220, Image.SCALE_SMOOTH);
+//            ImageIcon img = new ImageIcon(scaledObrazok);
 
             GridBagConstraints gbc = new GridBagConstraints();
             gbc.gridx = 0;
             gbc.gridy = 0;
             gbc.gridwidth = 5;
-            JLabel l = new JLabel(img);
-            add(l, gbc);
+//            JLabel l = new JLabel(img);
+//            add(l, gbc);
 
             // vynulovat
             gbc.ipadx = 0;
@@ -137,8 +137,8 @@ public class LogInForm extends javax.swing.JFrame implements MouseListener {
             gbc.gridx = 0;
             gbc.gridy = 1;
             gbc.ipadx = 80;
-            l = new JLabel();
-            add(l, gbc);
+ //           l = new JLabel();
+ //           add(l, gbc);
             // vynulovat
             gbc.ipadx = 0;
 

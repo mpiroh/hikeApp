@@ -148,31 +148,31 @@ public class MainForm extends javax.swing.JFrame {
         BufferedImage level4 = null;
         BufferedImage level5 = null;
 
-        try {
-            level1 = ImageIO.read(new File("C:\\logo\\lvl1.png"));
-            level2 = ImageIO.read(new File("C:\\logo\\lvl2.png"));
-            level3 = ImageIO.read(new File("C:\\logo\\lvl3.png"));
-            level4 = ImageIO.read(new File("C:\\logo\\lvl4.png"));
-            level5 = ImageIO.read(new File("C:\\logo\\lvl5.png"));
-
-        } catch (IOException ex) {
-            System.err.println("Neni obrazok!");
-        }
-        Image scaledObrazok1 = level1.getScaledInstance(65,
-                50, Image.SCALE_SMOOTH);
-        Image scaledObrazok2 = level2.getScaledInstance(65,
-                50, Image.SCALE_SMOOTH);
-        Image scaledObrazok3 = level3.getScaledInstance(65,
-                50, Image.SCALE_SMOOTH);
-        Image scaledObrazok4 = level4.getScaledInstance(50,
-                50, Image.SCALE_SMOOTH);
-        Image scaledObrazok5 = level5.getScaledInstance(50,
-                50, Image.SCALE_SMOOTH);
-        img1 = new ImageIcon(scaledObrazok1);
-        img2 = new ImageIcon(scaledObrazok2);
-        img3 = new ImageIcon(scaledObrazok3);
-        img4 = new ImageIcon(scaledObrazok4);
-        img5 = new ImageIcon(scaledObrazok5);
+//        try {
+//            level1 = ImageIO.read(new File("C:\\logo\\lvl1.png"));
+//            level2 = ImageIO.read(new File("C:\\logo\\lvl2.png"));
+//            level3 = ImageIO.read(new File("C:\\logo\\lvl3.png"));
+//            level4 = ImageIO.read(new File("C:\\logo\\lvl4.png"));
+//            level5 = ImageIO.read(new File("C:\\logo\\lvl5.png"));
+//
+//        } catch (IOException ex) {
+//            System.err.println("Neni obrazok!");
+//        }
+//        Image scaledObrazok1 = level1.getScaledInstance(65,
+//                50, Image.SCALE_SMOOTH);
+//        Image scaledObrazok2 = level2.getScaledInstance(65,
+//                50, Image.SCALE_SMOOTH);
+//        Image scaledObrazok3 = level3.getScaledInstance(65,
+//                50, Image.SCALE_SMOOTH);
+//        Image scaledObrazok4 = level4.getScaledInstance(50,
+//                50, Image.SCALE_SMOOTH);
+//        Image scaledObrazok5 = level5.getScaledInstance(50,
+//                50, Image.SCALE_SMOOTH);
+//        img1 = new ImageIcon(scaledObrazok1);
+//        img2 = new ImageIcon(scaledObrazok2);
+//        img3 = new ImageIcon(scaledObrazok3);
+//        img4 = new ImageIcon(scaledObrazok4);
+//        img5 = new ImageIcon(scaledObrazok5);
     }
 
     final class MyListCellRend implements ListCellRenderer<Tura> {

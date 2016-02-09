@@ -53,36 +53,36 @@ public class UzivatelMenu extends javax.swing.JFrame implements MouseListener {
         BufferedImage mapsObrazok = null;
         BufferedImage statsObrazok = null;
 
-        try {
-            searchObrazok = ImageIO.read(new File("C:\\naMenu\\search1.png"));
-            addObrazok = ImageIO.read(new File("C:\\naMenu\\add1.png"));
-            toolsObrazok = ImageIO.read(new File("C:\\naMenu\\tools1.png"));
-            inspirationObrazok = ImageIO.read(new File("C:\\naMenu\\inspiration.png"));
-            mapsObrazok = ImageIO.read(new File("C:\\naMenu\\map1.png"));
-            statsObrazok = ImageIO.read(new File("C:\\naMenu\\stats1.png"));
+//        try {
+//            searchObrazok = ImageIO.read(new File("C:\\naMenu\\search1.png"));
+//           addObrazok = ImageIO.read(new File("C:\\naMenu\\add1.png"));
+//            toolsObrazok = ImageIO.read(new File("C:\\naMenu\\tools1.png"));
+//            inspirationObrazok = ImageIO.read(new File("C:\\naMenu\\inspiration.png"));
+//            mapsObrazok = ImageIO.read(new File("C:\\naMenu\\map1.png"));
+//            statsObrazok = ImageIO.read(new File("C:\\naMenu\\stats1.png"));
 
-        } catch (IOException ex) {
-            System.err.println("Neni obrazok!");
-        }
-        Image scaledSearch = searchObrazok.getScaledInstance(45,
-                40, Image.SCALE_SMOOTH);
-        Image scaledTools = toolsObrazok.getScaledInstance(45,
-                40, Image.SCALE_SMOOTH);
-        Image scaledMaps = mapsObrazok.getScaledInstance(45,
-                40, Image.SCALE_SMOOTH);
-        Image scaledStats = statsObrazok.getScaledInstance(35,
-                30, Image.SCALE_SMOOTH);
-        Image scaledInspiration = inspirationObrazok.getScaledInstance(45,
-                40, Image.SCALE_SMOOTH);
-        Image scaledAdd = addObrazok.getScaledInstance(35,
-                30, Image.SCALE_SMOOTH);
+//        } catch (IOException ex) {
+//            System.err.println("Neni obrazok!");
+//        }
+//        Image scaledSearch = searchObrazok.getScaledInstance(45,
+//                40, Image.SCALE_SMOOTH);
+//        Image scaledTools = toolsObrazok.getScaledInstance(45,
+//                40, Image.SCALE_SMOOTH);
+//        Image scaledMaps = mapsObrazok.getScaledInstance(45,
+//                40, Image.SCALE_SMOOTH);
+//        Image scaledStats = statsObrazok.getScaledInstance(35,
+//                30, Image.SCALE_SMOOTH);
+//        Image scaledInspiration = inspirationObrazok.getScaledInstance(45,
+//                40, Image.SCALE_SMOOTH);
+//        Image scaledAdd = addObrazok.getScaledInstance(35,
+//                30, Image.SCALE_SMOOTH);
 
-        hladajLabel.setIcon(new ImageIcon(scaledSearch));
-        pridajLabel.setIcon(new ImageIcon(scaledAdd));
-        upravLabel.setIcon(new ImageIcon(scaledTools));
-        inspirujLabel.setIcon(new ImageIcon(scaledInspiration));
-        mojeTuryLabel.setIcon(new ImageIcon(scaledMaps));
-        statistikyLabel.setIcon(new ImageIcon(scaledStats));
+//        hladajLabel.setIcon(new ImageIcon(scaledSearch));
+//        pridajLabel.setIcon(new ImageIcon(scaledAdd));
+//        upravLabel.setIcon(new ImageIcon(scaledTools));
+//        inspirujLabel.setIcon(new ImageIcon(scaledInspiration));
+//        mojeTuryLabel.setIcon(new ImageIcon(scaledMaps));
+//        statistikyLabel.setIcon(new ImageIcon(scaledStats));
 
         pridajLabel.setHorizontalAlignment(JLabel.CENTER);
         pridajLabel.setVerticalAlignment(JLabel.CENTER);
@@ -102,13 +102,20 @@ public class UzivatelMenu extends javax.swing.JFrame implements MouseListener {
         inspirujLabel.setHorizontalAlignment(JLabel.CENTER);
         inspirujLabel.setVerticalAlignment(JLabel.CENTER);
 
-        pridajLabel.addMouseListener(this);
+        pridajLabel.addMouseListener(this);   
         hladajLabel.addMouseListener(this);
         mojeTuryLabel.addMouseListener(this);
         statistikyLabel.addMouseListener(this);
         upravLabel.addMouseListener(this);
         inspirujLabel.addMouseListener(this);
-
+        
+        pridajLabel.setText("pridat");
+        hladajLabel.setText("hladat");
+        mojeTuryLabel.setText("moje tury");
+        statistikyLabel.setText("statistiky");
+        upravLabel.setText("upravit");
+        inspirujLabel.setText("inspirovat");
+        
         this.pack();
         this.setTitle("HikeApp");
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -232,6 +239,10 @@ public class UzivatelMenu extends javax.swing.JFrame implements MouseListener {
         }
         if (preListener.equals(upravLabel)) {
             new MainForm(zoznamTur, IdUzivatela, 0).setVisible(true);
+            this.dispose();
+        }
+        if (preListener.equals(statistikyLabel)) {
+            new StatistikaForm(IdUzivatela).setVisible(true);
             this.dispose();
         }
     }

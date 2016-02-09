@@ -45,6 +45,8 @@ import org.jdesktop.swingx.JXLabel;
 import sk.ics.upjs.hikeapp.DaOFactory;
 import sk.ics.upjs.hikeapp.FotkaDaO;
 import sk.ics.upjs.hikeapp.MysqlTuraDaO;
+import sk.ics.upjs.hikeapp.Statistika;
+import sk.ics.upjs.hikeapp.StatistikaDao;
 import sk.ics.upjs.hikeapp.Tura;
 import sk.ics.upjs.hikeapp.TuraDaO;
 import sk.ics.upjs.hikeapp.UzivatelDaO;
@@ -75,6 +77,8 @@ public class VlozTuruForm extends javax.swing.JFrame implements ActionListener {
     
     private TuraDaO tury = DaOFactory.INSTANCE.getTuraDaO();
     private FotkaDaO fotos = DaOFactory.INSTANCE.getFotkaDaO();
+    private StatistikaDao statistikaDao = DaOFactory.INSTANCE.getStatistikaDao();
+    private UzivatelDaO uzivatelDaO = DaOFactory.INSTANCE.getUserDaO();
     
     private LinkedList<String> bodyTury = new LinkedList<String>();
     private StringBuilder ret = new StringBuilder();
@@ -92,7 +96,6 @@ public class VlozTuruForm extends javax.swing.JFrame implements ActionListener {
     
     public VlozTuruForm() {
         initComponents();
-        
     }
     
     public VlozTuruForm(Long userId) {
@@ -208,6 +211,34 @@ public class VlozTuruForm extends javax.swing.JFrame implements ActionListener {
             if (!fotky.isEmpty()) {
                 fotos.pridajFotky(fotky, tury.poslednaTuraUzivatela(IdU).getIdT());
             }
+            
+            Statistika s = statistikaDao.dajPodlaUzivatela(IdU);
+            s.setPocetTur(s.getPocetTur() + 1);
+            if (!dlzkaField.getText().isEmpty()) {
+                s.setKmSpolu(s.getKmSpolu() + t.getDlzka());
+            }
+            int pocetTur = tury.dajTuryPozivatela(IdU).size();
+            s.setPriemernaObtiaznost((s.getPriemernaObtiaznost() + t.getObtiaznost()) / pocetTur);
+            s.setPocetFotiek(s.getPocetFotiek() + fotky.size());
+            switch(t.getRocneObdobie()) {
+                case "jar":
+                    s.setSpoluTurJar(s.getSpoluTurJar() + 1);
+                    break;
+                case "leto":
+                    s.setSpoluTurLeto(s.getSpoluTurLeto() + 1);
+                    break;
+                case "jeseň":
+                    s.setSpoluTurJesen(s.getSpoluTurJesen() + 1);
+                    break;
+                case "zima":
+                    s.setSpoluTurZima(s.getSpoluTurZima() + 1);
+                    break;
+            }
+            s.setHodSpolu(s.getHodSpolu() + t.getCasovaNarocnost());
+            double rychlostTury = t.getDlzka() / t.getCasovaNarocnost();
+            s.setPriemernaRychlost((s.getPriemernaRychlost() + rychlostTury) / pocetTur);
+            statistikaDao.uprav(s);
+            
             this.dispose();
             new UzivatelMenu(IdU).setVisible(true);
         }
@@ -333,16 +364,16 @@ public class VlozTuruForm extends javax.swing.JFrame implements ActionListener {
         
         BufferedImage logInObrazok1 = null;
         
-        try {
-            logInObrazok1 = ImageIO.read(new File("C:\\logo\\mm.png"));
-            
-        } catch (IOException ex) {
-            System.err.println("Neni obrazok!");
-        }
-        Image scaledObrazok1 = logInObrazok1.getScaledInstance(550,
-                240, Image.SCALE_SMOOTH);
-        
-        fotkaLabel.setIcon(new ImageIcon(scaledObrazok1));
+//        try {
+//            logInObrazok1 = ImageIO.read(new File("C:\\logo\\mm.png"));
+//            
+//        } catch (IOException ex) {
+//            System.err.println("Neni obrazok!");
+//        }
+//            Image scaledObrazok1 = logInObrazok1.getScaledInstance(550,
+//                240, Image.SCALE_SMOOTH);
+//        
+//        fotkaLabel.setIcon(new ImageIcon(scaledObrazok1));
         
         gbc.gridx = 0;
         gbc.gridy = 0;

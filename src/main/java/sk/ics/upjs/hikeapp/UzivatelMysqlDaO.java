@@ -15,9 +15,9 @@ public class UzivatelMysqlDaO implements UzivatelDaO {
     public UzivatelMysqlDaO() {
         tmp = new JdbcTemplate();
         MysqlDataSource ds = new MysqlDataSource();
-        ds.setURL("jdbc:mysql://localhost/hike");
-        ds.setUser("root");
-        ds.setPassword("bambinko");
+        ds.setURL("jdbc:mysql://localhost/Hike");
+        ds.setUser("paz1c");
+        ds.setPassword("paz1c");
         tmp.setDataSource(ds);
     }
 
@@ -68,6 +68,27 @@ public class UzivatelMysqlDaO implements UzivatelDaO {
             }
         }
         return false;
+    }
+    
+    @Override
+    public List<Uzivatel> dajVsetkychZoradenychPodlaPoctuTur() {
+        String sql = "SELECT * FROM uzivatel u JOIN statistika s ON u.id = s.idU "
+                + "ORDER BY s.pocetTur DESC";
+        return tmp.query(sql, new UzivatelMapper());
+    }
+    
+    @Override
+    public List<Uzivatel> dajVsetkychZoradenychPodlaPoctuKm() {
+        String sql = "SELECT * FROM uzivatel u JOIN statistika s ON u.id = s.idU "
+                + "ORDER BY s.kmSpolu DESC";
+        return tmp.query(sql, new UzivatelMapper());
+    }
+    
+    @Override
+    public List<Uzivatel> dajVsetkychZoradenychPodlaPriemernejObtiaznosti() {
+        String sql = "SELECT * FROM uzivatel u JOIN statistika s ON u.id = s.idU "
+                + "ORDER BY s.priemernaObtiaznost DESC";
+        return tmp.query(sql, new UzivatelMapper());
     }
 
     public class UzivatelMapper implements RowMapper<Uzivatel> {
