@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.sql.Date;
 import sk.ics.upjs.hikeapp.DaOFactory;
 import sk.ics.upjs.hikeapp.Statistika;
 import sk.ics.upjs.hikeapp.StatistikaDao;
@@ -23,15 +24,9 @@ public class StatistikaForm extends javax.swing.JFrame {
     public StatistikaForm(Long idUzivatela) {
         initComponents();
         this.idUzivatela = idUzivatela;
-
         s = statistikaDao.dajPodlaUzivatela(idUzivatela);
-        pocetKilometrovLabel.setText(String.valueOf(s.getKmSpolu()));
-        pocetHodinLabel.setText(String.valueOf(s.getHodSpolu()));
-        priemernaRychlostLabel.setText(String.valueOf(s.getPriemernaRychlost()));
-        priemernaObtiaznostLabel.setText(String.valueOf(s.getPriemernaObtiaznost()));
-        pocetFotiekLabel.setText(String.valueOf(s.getPocetFotiek()));
-        pocetHodnoteniLabel.setText(String.valueOf(s.getPocetHodnoteni()));
-        pocetTurLabel.setText(String.valueOf(s.getPocetTur()));
+        
+        nastavLabely();
         
         pocetTurComboBox.addItem("Všetky");
         pocetTurComboBox.addItem("Jar");
@@ -89,6 +84,9 @@ public class StatistikaForm extends javax.swing.JFrame {
         zrusitButton = new javax.swing.JButton();
         rebricekButton = new javax.swing.JButton();
         pocetTurLabel = new javax.swing.JLabel();
+        vynulovatButton = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        datumLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -134,6 +132,19 @@ public class StatistikaForm extends javax.swing.JFrame {
 
         pocetTurLabel.setText("...");
 
+        vynulovatButton.setText("Vynulovať");
+        vynulovatButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                vynulovatButtonActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        jLabel8.setText("Zaznamenávané od:");
+
+        datumLabel.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        datumLabel.setText("...");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -142,56 +153,64 @@ public class StatistikaForm extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(vynulovatButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 159, Short.MAX_VALUE)
                         .addComponent(rebricekButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(zrusitButton))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel7)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(pocetHodnoteniLabel))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addComponent(jLabel6)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(pocetFotiekLabel))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addComponent(jLabel5)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
+                                    .addComponent(priemernaObtiaznostLabel))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addComponent(jLabel4)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(priemernaRychlostLabel))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addComponent(jLabel3)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(pocetHodinLabel))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addComponent(jLabel2)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(pocetKilometrovLabel))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel1)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(pocetTurComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(pocetTurLabel)))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(pocetHodnoteniLabel))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(pocetFotiekLabel))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(priemernaObtiaznostLabel))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(priemernaRychlostLabel))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(pocetHodinLabel))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(pocetKilometrovLabel))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(76, 76, 76)
-                                .addComponent(pocetTurComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
-                        .addComponent(pocetTurLabel)
-                        .addGap(0, 153, Short.MAX_VALUE)))
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(datumLabel)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(datumLabel))
+                .addGap(18, 30, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(pocetTurComboBox)
                         .addComponent(pocetTurLabel))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel1)))
+                    .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -216,10 +235,11 @@ public class StatistikaForm extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(pocetHodnoteniLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(zrusitButton)
-                    .addComponent(rebricekButton))
+                    .addComponent(rebricekButton)
+                    .addComponent(vynulovatButton))
                 .addContainerGap())
         );
 
@@ -236,7 +256,27 @@ public class StatistikaForm extends javax.swing.JFrame {
         new RebricekForm(idUzivatela).setVisible(true);
     }//GEN-LAST:event_rebricekButtonActionPerformed
 
+    private void vynulovatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vynulovatButtonActionPerformed
+        statistikaDao.vynulujStatistiku(s);
+        s = statistikaDao.dajPodlaUzivatela(idUzivatela);
+        nastavLabely();
+    }//GEN-LAST:event_vynulovatButtonActionPerformed
 
+    private void nastavLabely() {
+        pocetKilometrovLabel.setText(String.valueOf(s.getKmSpolu()));
+        pocetHodinLabel.setText(String.valueOf(s.getHodSpolu()));
+        priemernaRychlostLabel.setText(String.valueOf(s.getPriemernaRychlost()));
+        priemernaObtiaznostLabel.setText(String.valueOf(s.getPriemernaObtiaznost()));
+        pocetFotiekLabel.setText(String.valueOf(s.getPocetFotiek()));
+        pocetHodnoteniLabel.setText(String.valueOf(s.getPocetHodnoteni()));
+        pocetTurLabel.setText(String.valueOf(s.getPocetTur()));
+        Date datum = s.getVynulovanie();
+        int den = datum.getDate();
+        int mesiac = datum.getMonth() + 1;
+        int rok = datum.getYear() + 1900;
+        datumLabel.setText(den + "." + mesiac + "." + rok);
+    }
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -270,6 +310,7 @@ public class StatistikaForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel datumLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -277,6 +318,7 @@ public class StatistikaForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel pocetFotiekLabel;
     private javax.swing.JLabel pocetHodinLabel;
     private javax.swing.JLabel pocetHodnoteniLabel;
@@ -286,6 +328,7 @@ public class StatistikaForm extends javax.swing.JFrame {
     private javax.swing.JLabel priemernaObtiaznostLabel;
     private javax.swing.JLabel priemernaRychlostLabel;
     private javax.swing.JButton rebricekButton;
+    private javax.swing.JButton vynulovatButton;
     private javax.swing.JButton zrusitButton;
     // End of variables declaration//GEN-END:variables
 }

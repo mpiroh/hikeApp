@@ -229,7 +229,10 @@ public class MysqlTuraDaO implements TuraDaO {
 
     @Override
     public void pridaj(Tura tura) {
-        String insert = "insert into tura values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String insert = "INSERT INTO tura (idT, idU, nazov, popis, pohorie, ciel, " +
+                "casovaNarocnost, rocneObdobie, obtiaznost, MimoChodnik, " +
+                "dlzka, hodnotenie, pocetHodnoteni, detail) " +
+                "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         //Object dlzka = null;
         //if (tura.getDlzka() != 0) {
         //    dlzka = tura.getDlzka();

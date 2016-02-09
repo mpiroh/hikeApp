@@ -1,5 +1,7 @@
 package sk.ics.upjs.hikeapp;
 
+import java.sql.Date;
+
 public class Statistika {
     Long idS;
     
@@ -26,6 +28,16 @@ public class Statistika {
     double hodSpolu;
     
     double priemernaRychlost;
+    
+    Date vynulovanie;
+
+    public Date getVynulovanie() {
+        return vynulovanie;
+    }
+
+    public void setVynulovanie(Date vynulovanie) {
+        this.vynulovanie = vynulovanie;
+    }
     
     public Long getIdS() {
         return idS;

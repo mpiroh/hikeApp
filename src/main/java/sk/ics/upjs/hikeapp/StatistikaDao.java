@@ -6,4 +6,8 @@ public interface StatistikaDao {
     public void uprav(Statistika statistika);
     
     public Statistika dajPodlaUzivatela(Long idS);
+    
+    public void vynulujStatistiku(Statistika s);
+    
+    public boolean statistikaSaZaznamenava(Long idU);
 }

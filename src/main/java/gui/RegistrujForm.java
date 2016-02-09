@@ -16,6 +16,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -34,6 +35,7 @@ public class RegistrujForm extends javax.swing.JFrame {
     private JPasswordField hesloField = new JPasswordField();
     private JPasswordField heslo2Field = new JPasswordField();
     private JButton registerButton = new JButton("Registruj");
+    private JCheckBox statistikaCheckBox = new JCheckBox("Zaznamenávať štatistiku");
     private JLabel obrazokLabel = new JLabel();
     private UzivatelDaO uzivatel = DaOFactory.INSTANCE.getUserDaO();
     private StatistikaDao statistikaDao = DaOFactory.INSTANCE.getStatistikaDao();
@@ -50,12 +52,12 @@ public class RegistrujForm extends javax.swing.JFrame {
 
         BufferedImage logInObrazok1 = null;
 
-        try {
-            logInObrazok1 = ImageIO.read(new File("C:\\naMenu\\person.png"));
+//        try {
+//            logInObrazok1 = ImageIO.read(new File("C:\\naMenu\\person.png"));
 
-        } catch (IOException ex) {
-            System.err.println("Neni obrazok!");
-        }
+//        } catch (IOException ex) {
+//            System.err.println("Neni obrazok!");
+//        }
 //        Image scaledObrazok1 = logInObrazok1.getScaledInstance(80,
 //                75, Image.SCALE_SMOOTH);
 
@@ -99,6 +101,10 @@ public class RegistrujForm extends javax.swing.JFrame {
         gbc.gridy = 3;
         JLabel heslo2Label = new JLabel("Zopakuj heslo:");
         add(heslo2Label, gbc);
+        
+        gbc.gridx = 0;
+        gbc.gridy = 4;
+        add(statistikaCheckBox, gbc);
 
         gbc.gridx = 1;
         gbc.gridy = 1;
@@ -113,7 +119,7 @@ public class RegistrujForm extends javax.swing.JFrame {
         add(heslo2Field, gbc);
 
         gbc.gridx = 1;
-        gbc.gridy = 4;
+        gbc.gridy = 5;
         add(registerButton, gbc);
 
         registerButton.addMouseListener(new MouseAdapter() {
@@ -145,21 +151,13 @@ public class RegistrujForm extends javax.swing.JFrame {
                 
                 Long idUzivatela = uzivatel.getUserId(u.getMeno());
                 
-                Statistika statistika = new Statistika();
-                statistika.setIdU(idUzivatela);
-                statistika.setPocetTur(0);
-                statistika.setKmSpolu(0);
-                statistika.setPriemernaObtiaznost(0);
-                statistika.setPocetFotiek(0);
-                statistika.setSpoluTurJar(0);
-                statistika.setSpoluTurLeto(0);
-                statistika.setSpoluTurJesen(0);
-                statistika.setSpoluTurZima(0);
-                statistika.setPocetHodnoteni(0);
-                statistika.setHodSpolu(0);
-                statistika.setPriemernaRychlost(0);
-                statistikaDao.pridaj(statistika);
-                
+                if (statistikaCheckBox.isSelected()) {
+                    Statistika statistika = new Statistika();
+                    statistika.setIdU(idUzivatela);
+                    
+                    statistikaDao.pridaj(statistika);
+                    statistikaDao.vynulujStatistiku(statistika);
+                }
                 RegistrujForm.this.dispose();
                 new UzivatelMenu(uzivatel.getUserId(meno)).setVisible(true);
             }

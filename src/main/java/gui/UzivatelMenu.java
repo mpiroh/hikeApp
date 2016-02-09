@@ -18,11 +18,13 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.SwingWorker;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.SoftBevelBorder;
 import sk.ics.upjs.hikeapp.DaOFactory;
+import sk.ics.upjs.hikeapp.StatistikaDao;
 import sk.ics.upjs.hikeapp.Tura;
 import sk.ics.upjs.hikeapp.TuraDaO;
 import sk.ics.upjs.hikeapp.UzivatelDaO;
@@ -31,6 +33,7 @@ public class UzivatelMenu extends javax.swing.JFrame implements MouseListener {
 
     private TuraDaO tury;
     private UzivatelDaO uzivatel;
+    private StatistikaDao statistikaDao;
     private List<Tura> zoznamTur;
     private Long IdUzivatela;
     private JLabel preListener = null; // lebo bude davata MouseListener len na JLabely
@@ -43,6 +46,7 @@ public class UzivatelMenu extends javax.swing.JFrame implements MouseListener {
         initComponents();
         tury = DaOFactory.INSTANCE.getTuraDaO();
         uzivatel = DaOFactory.INSTANCE.getUserDaO();
+        statistikaDao = DaOFactory.INSTANCE.getStatistikaDao();
         IdUzivatela = idU;
         zoznamTur = tury.dajTuryPozivatela(idU);
 
@@ -242,8 +246,12 @@ public class UzivatelMenu extends javax.swing.JFrame implements MouseListener {
             this.dispose();
         }
         if (preListener.equals(statistikyLabel)) {
-            new StatistikaForm(IdUzivatela).setVisible(true);
-            this.dispose();
+            if(statistikaDao.statistikaSaZaznamenava(IdUzivatela)) {
+                new StatistikaForm(IdUzivatela).setVisible(true);
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "Štatistika sa nezaznamenáva.", "Chyba", JOptionPane.INFORMATION_MESSAGE);
+            }
         }
     }
 
